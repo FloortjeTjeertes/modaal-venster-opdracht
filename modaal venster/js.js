@@ -11,7 +11,7 @@ for (let i = 0; i < modaalContent.length; i++) {
 
 // lijst van de knoppen voegInhoud
 const modaalKnoppen = document.querySelectorAll('.modaal-knop');
-const modaalKnoppenArray =[];
+const modaalKnoppenArray = [];
 
 
 
@@ -20,7 +20,7 @@ let modaalbg = document.createElement('div');
 modaalbg.className = 'modaal-achtergrond';
 let modaal = document.createElement('div');
 modaal.className = 'modaal';
-let sluitKnop    = document.createElement('button');
+let sluitKnop = document.createElement('button');
 sluitKnop.className = 'sluit-knop';
 sluitKnop.innerHTML = '&#x00D7;';
 
@@ -28,16 +28,16 @@ sluitKnop.innerHTML = '&#x00D7;';
 // content aan dom toevoegen
 const voegInhoudToe = (event) => {
   const teller = modaalKnoppenArray.indexOf(event.target);
-console.log(teller);
-modaal.appendChild(sluitKnop);
+  console.log(teller);
+  modaal.appendChild(sluitKnop);
   modaal.appendChild(modaalContent[teller]);
   modaalbg.appendChild(modaal);
   document.body.appendChild(modaalbg);
 }
 //sluit addEventListener
-const sluit =() =>{
-  modaal.innerHTML='';
-  modaalbg.innerHTML ='';
+const sluit = () => {
+  modaal.innerHTML = '';
+  modaalbg.innerHTML = '';
   document.body.removeChild(modaalbg);
 }
 //sluitknop event listener
@@ -46,4 +46,18 @@ sluitKnop.addEventListener('click', sluit);
 for (let i = 0; i < modaalKnoppen.length; i++) {
   modaalKnoppenArray.push(modaalKnoppen[i]);
   modaalKnoppen[i].addEventListener('click', voegInhoudToe)
+}
+modaalbg.addEventListener('click', achtergrondklik)
+
+function achtergrondklik() {
+  console.log("lol");
+}
+
+modaalbg.addEventListener('click', sluit)
+
+modaal.addEventListener('click', stopmetklik)
+
+function stopmetklik() {
+  event.stopPropagation();
+  console.log("ha ik ga het nioet toestaand modaal achtergrond");
 }
